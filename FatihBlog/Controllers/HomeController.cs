@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FatihBlog.Controllers
 {
@@ -22,7 +23,6 @@ namespace FatihBlog.Controllers
         {
             return View();
         }
-
         public IActionResult Privacy()
         {
             return View();

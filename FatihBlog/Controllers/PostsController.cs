@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using FatihBlog.Data;
 using FatihBlog.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FatihBlog.Controllers
 {
@@ -19,12 +20,13 @@ namespace FatihBlog.Controllers
             _context = context;
         }
 
-        // GET: Posts
+        // POST: Posts
         public async Task<IActionResult> Index()
         {
             return View(await _context.Post.ToListAsync());
         }
 
+        [Authorize]
         // GET: Posts/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -42,8 +44,8 @@ namespace FatihBlog.Controllers
 
             return View(post);
         }
-
-        // GET: Posts/Create
+        [Authorize]
+        // POST: Posts/Create
         public IActionResult Create()
         {
             return View();
@@ -54,6 +56,7 @@ namespace FatihBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Create([Bind("Id,Name,Title,Content")] Post post)
         {
             if (ModelState.IsValid)
@@ -65,7 +68,8 @@ namespace FatihBlog.Controllers
             return View(post);
         }
 
-        // GET: Posts/Edit/5
+        [Authorize]
+        // POST: Posts/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +90,7 @@ namespace FatihBlog.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Title,Content")] Post post)
         {
             if (id != post.Id)
@@ -116,6 +121,7 @@ namespace FatihBlog.Controllers
             return View(post);
         }
 
+        [Authorize]
         // GET: Posts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -137,6 +143,7 @@ namespace FatihBlog.Controllers
         // POST: Posts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var post = await _context.Post.FindAsync(id);
@@ -145,6 +152,7 @@ namespace FatihBlog.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize]
         private bool PostExists(int id)
         {
             return _context.Post.Any(e => e.Id == id);

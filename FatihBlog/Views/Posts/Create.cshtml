@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 <div class="create-content-header">
-    <h1>Creating Diary...</h1>
+    <h1>Creating a Post...</h1>
     <hr />
 </div>
     <div class="row">
@@ -22,7 +22,7 @@
                     <span asp-validation-for="Title" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Content">Write Your Diary Here</label>
+                    <label asp-for="Content">Write Your Content</label>
                     <textarea asp-for="Content" class="form-control"></textarea>
                     <span asp-validation-for="Content" class="text-danger"></span>
                 </div>
@@ -33,7 +33,7 @@
         </div>
     </div>
 <div>
-    <a asp-action="Index">Back to Diary List</a>
+    <a asp-action="Index">Back to Posts</a>
 </div>
 
 @section Scripts {
